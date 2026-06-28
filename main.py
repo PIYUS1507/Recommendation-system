@@ -74,6 +74,7 @@ class TMDBMovieDetails(BaseModel):
     poster_url: Optional[str] = None
     backdrop_url: Optional[str] = None
     genres: List[dict] = []
+    vote_average: Optional[float] = None
 
 
 class TFIDFRecItem(BaseModel):
@@ -152,6 +153,7 @@ async def tmdb_movie_details(movie_id: int) -> TMDBMovieDetails:
         poster_url=make_img_url(data.get("poster_path")),
         backdrop_url=make_img_url(data.get("backdrop_path")),
         genres=data.get("genres", []) or [],
+        vote_average=data.get("vote_average"),
     )
 
 async def tmdb_search_movies(query: str, page: int = 1) -> Dict[str, Any]:
